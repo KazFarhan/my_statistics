@@ -1,0 +1,28 @@
+name: my_statistics
+
+description: >
+  Descriptive statistics (mean, median, mode, variance,
+  standard deviation) plus eye-catching Flutter line,
+  bar and pie charts with gradients and glow.
+
+version: 1.0.0
+
+homepage: https://github.com/KazFarhan/my_statistics
+repository: https://github.com/KazFarhan/my_statistics
+issue_tracker: https://github.com/KazFarhan/my_statistics/issues
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
