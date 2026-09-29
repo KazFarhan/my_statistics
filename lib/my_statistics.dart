@@ -1,19 +1,26 @@
-/// my_statistics
-///
 /// Descriptive statistics + eye-catching Flutter charts.
 library my_statistics;
 
-export 'statistics/mean.dart';
-export 'statistics/median.dart';
-export 'statistics/mode.dart';
-export 'statistics/variance.dart';
-export 'statistics/standard_deviation.dart';
+// Statistics imports
+import 'statistics/mean.dart';
+import 'statistics/median.dart';
+import 'statistics/mode.dart';
+import 'statistics/variance.dart';
+import 'statistics/standard_deviation.dart';
 
+// Chart exports
 export 'charts/chart_theme.dart';
 export 'charts/chart_frame.dart';
 export 'charts/line_chart.dart';
 export 'charts/bar_chart.dart';
 export 'charts/pie_chart.dart';
+
+// Statistics exports
+export 'statistics/mean.dart';
+export 'statistics/median.dart';
+export 'statistics/mode.dart';
+export 'statistics/variance.dart';
+export 'statistics/standard_deviation.dart';
 
 /// One-call summary of a numeric collection.
 class Stats {
@@ -50,18 +57,29 @@ class Stats {
   /// Build a full descriptive snapshot of [values].
   factory Stats.describe(Iterable<num> values) {
     final list = values.toList(growable: false);
+
     if (list.isEmpty) {
       throw ArgumentError('Cannot describe an empty collection.');
     }
+
     var sum = 0.0;
     var min = list.first.toDouble();
     var max = list.first.toDouble();
+
     for (final v in list) {
       final d = v.toDouble();
+
       sum += d;
-      if (d < min) min = d;
-      if (d > max) max = d;
+
+      if (d < min) {
+        min = d;
+      }
+
+      if (d > max) {
+        max = d;
+      }
     }
+
     return Stats._(
       count: list.length,
       sum: sum,
@@ -79,26 +97,30 @@ class Stats {
     );
   }
 
-  Map<String, Object> toMap() => {
-        'count': count,
-        'sum': sum,
-        'min': min,
-        'max': max,
-        'range': range,
-        'mean': mean,
-        'median': median,
-        'mode': mode,
-        'variance': variance,
-        'stdDev': stdDev,
-        'q1': q1,
-        'q3': q3,
-        'iqr': iqr,
-      };
+  Map<String, Object> toMap() {
+    return {
+      'count': count,
+      'sum': sum,
+      'min': min,
+      'max': max,
+      'range': range,
+      'mean': mean,
+      'median': median,
+      'mode': mode,
+      'variance': variance,
+      'stdDev': stdDev,
+      'q1': q1,
+      'q3': q3,
+      'iqr': iqr,
+    };
+  }
 
   @override
   String toString() {
     String f(double v) => v.toStringAsFixed(3);
-    return 'Stats(n=$count, mean=${f(mean)}, median=${f(median)}, '
-        'σ=${f(stdDev)}, min=${f(min)}, max=${f(max)})';
+
+    return 'Stats(n=$count, mean=${f(mean)}, '
+        'median=${f(median)}, σ=${f(stdDev)}, '
+        'min=${f(min)}, max=${f(max)})';
   }
 }
